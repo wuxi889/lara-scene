@@ -1,0 +1,14 @@
+{
+    "name": "usee/lara-scence",
+    "description": "The repository is validator scence trait for laravel, like ThinkPHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "uSee",
+            "email": "you-see@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
