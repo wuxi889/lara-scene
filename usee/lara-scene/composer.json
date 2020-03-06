@@ -1,0 +1,24 @@
+{
+    "name": "usee/lara-scene",
+    "description": "The repository is validator scene trait for laravel, like ThinkPHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "uSee",
+            "email": "you-see@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Usee\\LaraScene\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Usee\\LaraScene\\Tests\\": "tests/"
+        }
+    }
+}
