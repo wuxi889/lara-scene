@@ -3,13 +3,11 @@
  * @Description: Validate Scene Trait
  * @Author: uSee
  * @Date: 2020-03-05 15:53:58
- * @LastEditors: uSee
- * @LastEditTime: 2020-03-06 18:12:49
+ * @LastEditors: Wuxi
+ * @LastEditTime: 2020-03-10 17:07:28
  */
 
 namespace Usee\LaraScene;
-
-use Illuminate\Foundation\Http\FormRequest;
 
 trait Scene
 {
@@ -52,24 +50,6 @@ trait Scene
      * @DateTime 2020-03-06
      */
     protected $currentScene = '';
-
-    /**
-     * 验证结果
-     *
-     * @Description: 
-     * @Author: uSee | wuxi889@vip.qq.com
-     * @DateTime 2020-03-06
-     * @return boolean
-     */
-    protected function sceneValidator(): bool
-    {
-        // 验证器不存在 直接返回true
-        if (!in_array($this->currentScene, array_keys($this->scenes))) return true;
-        
-        // 验证器存在 验证每条规则
-
-        return true;
-    }
 
     /**
      * 返回验证自定义消息
