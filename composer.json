@@ -1,5 +1,5 @@
 {
-    "name": "usee/lara-scene",
+    "name": "usee/lara_scene",
     "description": "The repository is validator scene trait for laravel, like ThinkPHP",
     "type": "library",
     "license": "MIT",
