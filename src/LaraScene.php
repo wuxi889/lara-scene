@@ -4,7 +4,7 @@
  * @Author: uSee
  * @Date: 2020-03-05 15:53:58
  * @LastEditors: Wuxi
- * @LastEditTime: 2020-03-11 14:43:19
+ * @LastEditTime: 2020-03-11 15:34:08
  */
 
 namespace Usee\LaraScene;
@@ -12,7 +12,7 @@ namespace Usee\LaraScene;
 trait Scene
 {
     /**
-     * 所有所有规则
+     * 所有规则
      *
      * @var array
      * @Description: 
@@ -22,7 +22,7 @@ trait Scene
     protected $allRules = [];
 
     /**
-     * 所有自定义消息
+     * 所有自定义错误信息
      *
      * @var array
      * @Description: 
@@ -65,6 +65,20 @@ trait Scene
     }
 
     /**
+     * 设置当前场景
+     *
+     * @Description: 
+     * @Author: Wuxi | wuxi@wufeng-network.com
+     * @DateTime 2020-03-11
+     * @param string $scene
+     * @return void
+     */
+    public function setCurrentScene(string $scene = ''): void
+    {
+        $this->currentScene = $scene;
+    }
+
+    /**
      * 返回验证规则
      *
      * @Description: 
@@ -74,16 +88,13 @@ trait Scene
      */
     public function rules(): array
     {
+        // 设置当前场景
+        !$this->currentScene && $this->setCurrentScene($this->route()->getActionMethod());
+
         // 获取场景下的规则名
         $rule_name = $this->scenes[$this->currentScene] ?? [];
-        $all_rules = $this->allRules;
 
         // 获取规则名对应的规则
-        $rules = [];
-        array_walk($rule_name, function ($val) use (&$rules, $all_rules) {
-            array_key_exists($val, $all_rules) && ($rules[$val] = $all_rules[$val]);
-        });
-
-        return $rules;
+        return array_intersect_key($this->allRules, array_flip($rule_name));
     }
 }
