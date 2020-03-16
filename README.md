@@ -5,7 +5,7 @@
 
 > composer require usee/lara_scene
 
-成功引入 *Composer* 后，在 `Request` 头部调用它，然后在 XxxRequest 中创建构造方法，在方法中增加 `AllRules`、`AllMessages`、`Scenes` 三个属性，同 ThinkPHP
+成功引入 *Composer* 后，在 `Request` 头部加入它，然后在 TestRequest 的中增加 `AllRules`、`AllMessages`、`Scenes` 三个属性，类似于 ThinkPHP
 
 #### 如下：
 ```php
@@ -20,35 +20,32 @@ class TestRequest extends FormRequest
 {
     use Scene; // 使用它
 
-    public function __construct()
-    {
-        // 定义 allRules
-        $this->allRules = [
-            'username'  => 'required|alpha_dash',
-            'age'       => 'required|integer|min:0',
-            'page'      => 'integer|min:1',
-            'rows'      => 'integer|min:10'
-        ];
+    // 定义 allRules
+    protected $allRules = [
+        'username'  => 'required|alpha_dash',
+        'age'       => 'required|integer|min:0',
+        'page'      => 'integer|min:1',
+        'rows'      => 'integer|min:10'
+    ];
 
-        // 定义 allMessages
-        $this->allMessages = [
-            'username.required'     => '用户名称必须填写',
-            'username.alpha_dash'   => '用户名称禁止含有特殊字符',
-            'age.required'          => '年龄必须填写',
-            'age.integer'           => '年龄只能为整数',
-            'age.min'               => '年龄最小只能为0',
-            'page.integer'          => '页码只能为整数',
-            'page.min'              => '页码最小只能为1',
-            'rows.integer'          => '每页显示条数只能为整数',
-            'rows.min'              => '每页显示条数最小为10条',
-        ];
+    // 定义 allMessages
+    protected $allMessages = [
+        'username.required'     => '用户名称必须填写',
+        'username.alpha_dash'   => '用户名称禁止含有特殊字符',
+        'age.required'          => '年龄必须填写',
+        'age.integer'           => '年龄只能为整数',
+        'age.min'               => '年龄最小只能为0',
+        'page.integer'          => '页码只能为整数',
+        'page.min'              => '页码最小只能为1',
+        'rows.integer'          => '每页显示条数只能为整数',
+        'rows.min'              => '每页显示条数最小为10条',
+    ];
 
-        // 定义 scenes
-        $this->scenes = [
-            'index' => ['page', 'rows'],
-            'create'=> ['username', 'age']
-        ];
-    }
+    // 定义 scenes
+    protected $scenes = [
+        'index' => ['page', 'rows'],
+        'create'=> ['username', 'age']
+    ];
 
     /**
      * Determine if the user is authorized to make this request.

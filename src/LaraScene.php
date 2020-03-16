@@ -4,7 +4,7 @@
  * @Author: uSee
  * @Date: 2020-03-05 15:53:58
  * @LastEditors: Wuxi
- * @LastEditTime: 2020-03-11 15:34:08
+ * @LastEditTime: 2020-03-16 09:53:03
  */
 
 namespace Usee\LaraScene;
@@ -19,7 +19,7 @@ trait Scene
      * @Author: uSee | you-see@qq.com
      * @DateTime 2020-03-06
      */
-    protected $allRules = [];
+    // protected $allRules = [];
 
     /**
      * 所有自定义错误信息
@@ -29,7 +29,7 @@ trait Scene
      * @Author: uSee | you-see@qq.com
      * @DateTime 2020-03-06
      */
-    protected $allMessages = [];
+    // protected $allMessages = [];
 
     /**
      * 验证器场景数组
@@ -39,7 +39,7 @@ trait Scene
      * @Author: uSee | you-see@qq.com
      * @DateTime 2020-03-06
      */
-    protected $scenes = [];
+    // protected $scenes = [];
 
     /**
      * 当前场景
@@ -61,7 +61,7 @@ trait Scene
      */
     public function messages(): array
     {
-        return $this->allMessages;
+        return $this->allMessages ?? [];
     }
 
     /**
@@ -95,6 +95,6 @@ trait Scene
         $rule_name = $this->scenes[$this->currentScene] ?? [];
 
         // 获取规则名对应的规则
-        return array_intersect_key($this->allRules, array_flip($rule_name));
+        return array_intersect_key(($this->allRules ?? []), array_flip($rule_name));
     }
 }
