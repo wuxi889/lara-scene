@@ -75,7 +75,12 @@ trait Scene
      */
     public function setCurrentScene(string $scene = ''): void
     {
-        $this->currentScene = $scene;
+        if (empty($scene)) {
+            $as = $this->route()->getAction('as');
+            list($controller, $scene) = explode('.', $as);
+        }
+
+        $this->currentScene = $scene ?? '';
     }
 
     /**
@@ -89,7 +94,7 @@ trait Scene
     public function rules(): array
     {
         // 设置当前场景
-        !$this->currentScene && $this->setCurrentScene($this->route()->getActionMethod());
+        !$this->currentScene && $this->setCurrentScene('');
 
         // 获取场景下的规则名
         $rule_name = $this->scenes[$this->currentScene] ?? [];
