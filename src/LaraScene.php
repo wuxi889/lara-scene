@@ -19,7 +19,7 @@ trait Scene
      * @Author: uSee | you-see@qq.com
      * @DateTime 2020-03-06
      */
-    // protected $allRules = [];
+    protected $allRules = [];
 
     /**
      * 所有自定义错误信息
@@ -29,7 +29,7 @@ trait Scene
      * @Author: uSee | you-see@qq.com
      * @DateTime 2020-03-06
      */
-    // protected $allMessages = [];
+    protected $allMessages = [];
 
     /**
      * 验证器场景数组
@@ -39,7 +39,7 @@ trait Scene
      * @Author: uSee | you-see@qq.com
      * @DateTime 2020-03-06
      */
-    // protected $scenes = [];
+    protected $scenes = [];
 
     /**
      * 当前场景
@@ -77,7 +77,7 @@ trait Scene
     {
         if (empty($scene)) {
             $as = $this->route()->getAction('as');
-            list($controller, $scene) = explode('.', $as);
+            list(, $scene) = explode('.', $as);
         }
 
         $this->currentScene = $scene ?? '';
@@ -101,5 +101,31 @@ trait Scene
 
         // 获取规则名对应的规则
         return array_intersect_key(($this->allRules ?? []), array_flip($rule_name));
+    }
+
+    /**
+     * 添加场景
+     *
+     * @param string $scene
+     * @param array $rules
+     * @return void
+     */
+    public function addScene(string $scene, array $rules): void
+    {
+        $this->scenes[$scene] = $rules;
+    }
+
+    /**
+     * 添加规则
+     *
+     * @param string $name
+     * @param string $rule
+     * @param array $messages
+     * @return void
+     */
+    public function addAllRules(string $name, string $rule, array $messages): void
+    {
+        $this->allRules[$name] = $rule;
+        $this->allMessages = array_merge($this->allMessages, $messages);
     }
 }
