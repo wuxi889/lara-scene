@@ -76,8 +76,8 @@ trait Scene
     public function setCurrentScene(string $scene = ''): void
     {
         if (empty($scene)) {
-            $as = $this->route()->getAction('as');
-            list(, $scene) = explode('.', $as);
+            $uses = $this->route()->getAction('uses');
+            list(, $scene) = explode('@', $uses);
         }
 
         $this->currentScene = $scene ?? '';
