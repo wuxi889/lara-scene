@@ -1,11 +1,4 @@
 <?php
-/*
- * @Description: Validate Scene Trait
- * @Author: uSee
- * @Date: 2020-03-05 15:53:58
- * @LastEditors: Wuxi
- * @LastEditTime: 2020-03-16 09:53:03
- */
 
 namespace Usee\LaraScene;
 
@@ -19,7 +12,7 @@ trait Scene
      * @Author: uSee | you-see@qq.com
      * @DateTime 2020-03-06
      */
-    protected $allRules = [];
+    protected $all_rules = [];
 
     /**
      * 所有自定义错误信息
@@ -29,7 +22,7 @@ trait Scene
      * @Author: uSee | you-see@qq.com
      * @DateTime 2020-03-06
      */
-    protected $allMessages = [];
+    protected $all_messages = [];
 
     /**
      * 验证器场景数组
@@ -49,7 +42,7 @@ trait Scene
      * @Author: uSee | you-see@qq.com
      * @DateTime 2020-03-06
      */
-    protected $currentScene = '';
+    protected $current_scene = '';
 
     /**
      * 返回验证自定义消息
@@ -61,7 +54,7 @@ trait Scene
      */
     public function messages(): array
     {
-        return $this->allMessages ?? [];
+        return $this->all_messages ?? [];
     }
 
     /**
@@ -80,7 +73,7 @@ trait Scene
             list(, $scene) = explode('@', $uses);
         }
 
-        $this->currentScene = $scene ?? '';
+        $this->current_scene = $scene ?? '';
     }
 
     /**
@@ -94,13 +87,13 @@ trait Scene
     public function rules(): array
     {
         // 设置当前场景
-        !$this->currentScene && $this->setCurrentScene('');
+        !$this->current_scene && $this->setCurrentScene('');
 
         // 获取场景下的规则名
-        $rule_name = $this->scenes[$this->currentScene] ?? [];
+        $rule_name = $this->scenes[$this->current_scene] ?? [];
 
         // 获取规则名对应的规则
-        return array_intersect_key(($this->allRules ?? []), array_flip($rule_name));
+        return array_intersect_key(($this->all_rules ?? []), array_flip($rule_name));
     }
 
     /**
@@ -125,7 +118,7 @@ trait Scene
      */
     public function addAllRules(string $name, string $rule, array $messages): void
     {
-        $this->allRules[$name] = $rule;
-        $this->allMessages = array_merge($this->allMessages, $messages);
+        $this->all_rules[$name] = $rule;
+        $this->all_messages = array_merge($this->all_messages, $messages);
     }
 }
