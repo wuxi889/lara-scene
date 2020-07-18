@@ -1,6 +1,6 @@
 <?php
 
-namespace Usee\LaraScene;
+namespace Usee\LaraScene\Traits;
 
 trait Scene
 {
