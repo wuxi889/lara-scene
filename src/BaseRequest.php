@@ -14,7 +14,7 @@ class BaseRequest extends FormRequest
      *
      * @var boolean
      */
-    protected $queryRequest = false;
+    protected $query_request = false;
 
     /**
      * 构造方法
@@ -22,7 +22,7 @@ class BaseRequest extends FormRequest
     public function __construct()
     {
         // 添加分页验证
-        if ($this->queryRequest) $this->addQueryValidate();
+        if ($this->query_request) $this->addQueryValidate();
     }
 
     /**
